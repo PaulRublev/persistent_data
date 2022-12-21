@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'categories_view.dart';
+import 'images_view.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -12,7 +12,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const CategoriesView(),
+      home: const ImagesView(),
     );
   }
 }
