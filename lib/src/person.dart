@@ -3,12 +3,12 @@ import 'package:floor/floor.dart';
 @entity
 class Person {
   @primaryKey
-  final int id;
-  final String firstName;
-  final String lastName;
-  final int age;
-  final String imageName;
-  final int telephone;
+  int id;
+  String firstName;
+  String lastName;
+  int age;
+  String imageName;
+  int telephone;
 
   Person(
     this.id,

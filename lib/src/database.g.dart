@@ -164,13 +164,30 @@ class _$PersonDao extends PersonDao {
   }
 
   @override
+  Future<Person?> findMaxId() async {
+    return _queryAdapter.query(
+        'SELECT * FROM Person WHERE id = (SELECT MAX(id) FROM Person)',
+        mapper: (Map<String, Object?> row) => Person(
+            row['id'] as int,
+            row['firstName'] as String,
+            row['lastName'] as String,
+            row['age'] as int,
+            row['imageName'] as String,
+            row['telephone'] as int));
+  }
+
+  @override
   Future<void> update(
     String firstName,
+    String lastName,
+    int age,
+    String imageName,
+    int telephone,
     int id,
   ) async {
     await _queryAdapter.queryNoReturn(
-        'UPDATE Person SET firstName = ?1 WHERE id = ?2',
-        arguments: [firstName, id]);
+        'UPDATE Person SET firstName = ?1, lastName = ?2, age = ?3, imageName = ?4, telephone = ?5 WHERE id = ?6',
+        arguments: [firstName, lastName, age, imageName, telephone, id]);
   }
 
   @override

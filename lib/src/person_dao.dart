@@ -15,8 +15,19 @@ abstract class PersonDao {
   @Query('DROP TABLE Person')
   Future<void> dropTable();
 
-  @Query('UPDATE Person SET firstName = :firstName WHERE id = :id')
-  Future<void> update(String firstName, int id);
+  @Query('SELECT * FROM Person WHERE id = (SELECT MAX(id) FROM Person)')
+  Future<Person?> findMaxId();
+
+  @Query(
+      'UPDATE Person SET firstName = :firstName, lastName = :lastName, age = :age, imageName = :imageName, telephone = :telephone WHERE id = :id')
+  Future<void> update(
+    String firstName,
+    String lastName,
+    int age,
+    String imageName,
+    int telephone,
+    int id,
+  );
 
   @insert
   Future<void> insertPerson(Person person);
