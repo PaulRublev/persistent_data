@@ -5,8 +5,9 @@ import 'package:persistent_data/src/widgets/image_picker.dart';
 
 class PersonPage extends StatelessWidget {
   Person? person;
-  final Function addOrUpdate;
+  final Function(Person, String) addOrUpdate;
   final int? id;
+  String? cardInfo;
 
   late final TextEditingController _controllerFirstName;
   late final TextEditingController _controllerAge;
@@ -15,12 +16,14 @@ class PersonPage extends StatelessWidget {
   late final TextEditingController _controllerCard;
 
   String _imageName = '';
+  late Person _person;
 
   PersonPage({
     super.key,
     this.person,
     required this.addOrUpdate,
     this.id,
+    this.cardInfo,
   });
 
   void _setImageName(String name) {
@@ -86,7 +89,7 @@ class PersonPage extends StatelessWidget {
               ),
               TextField(
                 controller: _controllerCard = TextEditingController(
-                  text: isNewPerson ? '' : 'card info',
+                  text: isNewPerson ? '' : cardInfo.toString(),
                 ),
                 decoration: const InputDecoration(labelText: 'Card info'),
               ),
@@ -105,7 +108,7 @@ class PersonPage extends StatelessWidget {
                 _controllerTel.value.text.isEmpty) {
               throw Exception;
             }
-            person = Person(
+            _person = Person(
               isNewPerson ? (id ?? 0) + 1 : person?.id ?? 1,
               _controllerFirstName.value.text,
               _controllerLastName.value.text,
@@ -131,7 +134,7 @@ class PersonPage extends StatelessWidget {
             );
             return;
           }
-          addOrUpdate(person);
+          addOrUpdate(_person, _controllerCard.value.text);
           Navigator.of(context).pop();
         },
       ),
