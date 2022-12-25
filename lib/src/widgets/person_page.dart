@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:persistent_data/src/database.dart';
+import 'package:persistent_data/src/app_database.dart';
 import 'package:persistent_data/src/widgets/image_picker.dart';
 
 class PersonPage extends StatelessWidget {

@@ -9,7 +9,7 @@ import 'person_dao.dart';
 export 'person.dart';
 export 'person_dao.dart';
 
-part 'database.g.dart';
+part 'app_database.g.dart';
 
 @Database(version: 1, entities: [Person])
 abstract class AppDatabase extends FloorDatabase {
